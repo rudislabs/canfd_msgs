@@ -31,8 +31,8 @@ class ROS2CyphalMessagePublisherTest(Node):
         self.CmdVelPub.publish(bogusCmdVel)
 
     def PublishPCAPWMValues(self, ReceivedMsg):
-        VelocitySetpointUS = np.uint16((ReceivedMsg.linear.x * 30) + 1500)
-        TurnSetpointUS = np.uint16((ReceivedMsg.angular.z * 50) + 1500)
+        VelocitySetpointUS = np.uint16((ReceivedMsg.linear.x * 72) + 1500)
+        TurnSetpointUS = np.uint16((ReceivedMsg.angular.z * 150) + 1500)
         if(VelocitySetpointUS > 1590):
             VelocitySetpointUS = 1590
         if(VelocitySetpointUS < 1410):
