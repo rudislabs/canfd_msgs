@@ -23,11 +23,12 @@ class ROS2CyphalMessagePublisherTest(Node):
         self.InitTime = int(round(self.get_clock().now().nanoseconds/1000.0))
         self.CounterCyphalMsg = 0
         self.PubCyphal = self.create_publisher(OpenCyphalMessage, 'CyphalTransmitFrame', 0)
+        self.CmdVelPub = self.create_publisher(Twist, '/cmd_vel', 10)
         self.SubCmdVel = self.create_subscription(Twist, '/cmd_vel', self.PublishPCAPWMValues, 10)
         bogusCmdVel = Twist()
         bogusCmdVel.linear.x = 0.0
         bogusCmdVel.angular.z = 0.0
-        PublishPCAPWMValues(bogusCmdVel)
+        self.CmdVelPub.publish(bogusCmdVel)
 
     def PublishPCAPWMValues(self, ReceivedMsg):
         VelocitySetpointUS = np.uint16((ReceivedMsg.linear.x * 30) + 1500)
